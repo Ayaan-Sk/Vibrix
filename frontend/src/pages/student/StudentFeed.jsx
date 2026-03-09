@@ -123,7 +123,7 @@ const StudentFeed = () => {
             <div key={i} className="h-[280px] rounded-2xl bg-white/5 animate-pulse" />
           ))
         ) : (
-          notices.filter(n => filter === 'All' || n.tags.includes(filter) || (filter === 'Critical' && n.urgency === 'critical')).map(notice => (
+          notices.filter(n => filter === 'All' || (n.tags || []).includes(filter) || (filter === 'Critical' && n.urgency === 'critical')).map(notice => (
             <NoticeCard 
               key={notice._id} 
               notice={notice} 

@@ -1,14 +1,13 @@
 const Anthropic = require('@anthropic-ai/sdk');
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+const axios = require('axios');
 
 const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 async function claudePipeline(imageUrl) {
   try {
-    const response = await fetch(imageUrl);
-    const arrayBuffer = await response.arrayBuffer();
-    const base64 = Buffer.from(arrayBuffer).toString('base64');
-    const mimeType = response.headers.get('content-type') || 'image/jpeg';
+    const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+    const base64 = Buffer.from(response.data).toString('base64');
+    const mimeType = response.headers['content-type'] || 'image/jpeg';
 
     const result = await client.messages.create({
       model: 'claude-3-5-sonnet-20241022',
@@ -40,8 +39,8 @@ Read this college notice image. Do the following:
     const parsed = JSON.parse(text);
     return parsed;
   } catch (error) {
-    console.error('Claude Pipeline Error:', error);
-    throw new Error('Failed to process image with AI');
+    console.error('Claude Pipeline Error DETAILS:', error);
+    throw new Error('Failed to process image with AI: ' + error.message);
   }
 }
 

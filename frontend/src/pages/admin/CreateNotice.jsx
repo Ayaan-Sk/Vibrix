@@ -36,8 +36,14 @@ const CreateNotice = () => {
     setLoading(true);
     try {
       const payload = { ...formData, isDraft };
+      
+      // Prevent Mongoose cast errors on empty date strings
+      if (!payload.expiryDate) {
+        delete payload.expiryDate;
+      }
+
       if (aiResult) {
-        payload.heading = aiResult.heading;
+        payload.title = aiResult.heading; // Fixed mapping
         payload.summary = aiResult.summary;
         payload.tags = aiResult.suggestedTags;
         payload.urgency = aiResult.urgency;

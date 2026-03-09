@@ -1,0 +1,6 @@
+Testing OCR with: https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/200px-React-icon.svg.png
+OCR Error: Error: Failed to process image with AI: fetch failed
+Error: Failed to process image with AI: fetch failed
+    at claudePipeline (C:\Users\AA\Downloads\Hackthonix\Vibrix\backend\src\utils\claudePipeline.js:43:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async testOCR (C:\Users\AA\Downloads\Hackthonix\Vibrix\backend\test-ocr2.js:10:20)

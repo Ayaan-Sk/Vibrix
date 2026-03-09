@@ -1,7 +1,9 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './store/AuthContext';
 import { ProtectedRoute } from './components/shared/ProtectedRoute';
+import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/auth/LoginPage';
+import RegisterPage from './pages/auth/RegisterPage';
 import StudentFeed from './pages/student/StudentFeed';
 import NoticeDetail from './pages/student/NoticeDetail';
 import ProfilePage from './pages/student/ProfilePage';
@@ -18,7 +20,9 @@ function App() {
     <Router>
       <AuthProvider>
         <Routes>
+          <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
           
           {/* Student Routes */}
           <Route path="/student/feed" element={
@@ -76,8 +80,6 @@ function App() {
           } />
           <Route path="/offline" element={<OfflinePage />} />
 
-          {/* Default Redirect */}
-          <Route path="/" element={<Navigate to="/login" replace />} />
           <Route path="*" element={<Placeholder title="404 Not Found" />} />
         </Routes>
       </AuthProvider>
